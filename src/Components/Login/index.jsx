@@ -8,15 +8,10 @@ import { Button, Container, Form, Input, Registra, Title } from './style';
 export default function LoginPage(){
     const navigate = useNavigate();
     const { setToken } = useContext(TokenContext);
-    const [ dadosLogin, setDadosLogin ] = useState({email: "", senha: ""});
+    const [ dadosLogin, setDadosLogin ] = useState({email: "", hash: ""});
     const [ desativado , setDesativado ] = useState(false);
 
-    function login(e) {
-        if (dadosLogin){
-            setDesativado(true);
-            return;
-        }
-    
+    function login(e) {    
         e.preventDefault();
         const URL_LOGIN = `${process.env.REACT_APP_URL_API}/login`;
         const promessa = axios.post(URL_LOGIN, dadosLogin);
@@ -37,9 +32,9 @@ export default function LoginPage(){
                 onChange={e => setDadosLogin({...dadosLogin, email: e.target.value})} 
                 pattern="^([\w\-]+\.)*[\w\- ]+@([\w\- ]+\.)+([\w\-]{2,3})$" 
                 title="Digite um endereço de email válido." disabled={desativado} />
-                <Input required type="password" placeholder=" Senha" value={dadosLogin.senha} 
-                onChange={e => setDadosLogin({...dadosLogin, senha: e.target.value})} 
-                pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$" disabled={desativado}
+                <Input required type="password" placeholder="Senha" value={dadosLogin.hash} 
+                onChange={e => setDadosLogin({...dadosLogin, hash: e.target.value})} 
+                pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$" disabled={desativado}
                 title="Mínimo de 8 caracterese pelo menos 1 letra maiúscula, 1 letra minúscula e 1 número" />
                 <Button type='submit' disabled={desativado}>
                     {desativado ? <img src={loading} alt="carregando..."/> : "Entrar"}
