@@ -26,7 +26,6 @@ export const Header = styled.header`
     gap: 10px;
 
     section {
-        width: 50px;
         height: 20px;
         display: flex;
         gap: 10px;
@@ -37,6 +36,28 @@ export const Title = styled.h1`
     font-size: 20px;
     font-weight: 700;
     color: #00265d;
+`;
+export const UserOptions = styled.aside`
+    background-color: #ffffff;
+    position: fixed;
+    top: 52px;
+    right: 20px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+
+    p {
+        font-size: 16px;
+        color: #00265d;
+        cursor: pointer;
+    } 
+    p:hover{
+        opacity: 0.7;
+    }
 `;
 // export const Input = styled.input`
 //     width: 305px;

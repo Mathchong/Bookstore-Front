@@ -52,6 +52,7 @@ export const Title = styled.h1`
     font-weight: 700;
     color: #ffffff;
     margin-bottom: 10px;
+    cursor: pointer;
 `;
 export const Registra = styled(Link)`
     font-size: 12px;
