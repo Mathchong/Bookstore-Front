@@ -23,14 +23,19 @@ export default function HomePage() {
     useEffect(() => {
         const URL_BOOKS = `${process.env.REACT_APP_URL_API}/books`;
         const request = axios.get(URL_BOOKS);
-        request.then(response => {console.log(response.data);
-                                setbooksData(response.data)})
+        request.then(response => setbooksData(response.data))
         request.catch(error => console.log(error));
     },[]);
 
     function logout(){
-        setToken("");
-        setMenuUser(false);
+        const URL_LOGOUT = `${process.env.REACT_APP_URL_API}/logout`;
+        const config = {headers: { Authorization: `Bearer ${token}`}};
+        const request = axios.delete(URL_LOGOUT, config);
+        request.then(() => {setToken("");
+                            setMenuUser(false);
+                            navigate("/");
+        });
+        request.catch(error => console.log(error));
     }
 
     return (
