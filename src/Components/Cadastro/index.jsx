@@ -1,7 +1,11 @@
-import styled from 'styled-components';
-import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate, Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import loading from './../../assets/loading.gif';
+import { Button, Container, Form, Input, Logar, Title } from './style';
+
+
+
 
 export default function CadastroPage() {
     const [nome, setNome] = useState('');
@@ -26,14 +30,14 @@ export default function CadastroPage() {
             email,
             senha
         }
-        const promise = axios.post(`${process.env.REACT_APP_API_URL}/api/register`, user)
+        axios.post(`${process.env.REACT_APP_API_URL}/api/register`, user)
             .then((response) => {
                 alert('Conta criada com sucesso!')
                 navigate('/login')
             })
             .catch((error) => {
                 console.error(process.env.REACT_APP_API_URL)
-                alert("Erro na criação da conta senha!")
+                alert("Erro na criação da conta!")
                 setConectando(false)
             })
     }
@@ -41,55 +45,39 @@ export default function CadastroPage() {
 
     return (
         <Container>
-            <form onSubmit={(e) => { register(e) }}>
-                <input required disabled={conectando ? true : false} type="text" placeholder=" Nome" value={nome} onChange={(e) => { setNome(e.target.value) }} />
-                <input required disabled={conectando ? true : false} type="email" placeholder=" E-mail" value={email} onChange={(e) => { setEmail(e.target.value) }} />
-                <input required disabled={conectando ? true : false} type="number" placeholder=" CPF" value={cpf} onChange={(e) => { setCpf(e.target.value) }} />
-                <input required disabled={conectando ? true : false} type="password" placeholder=" Senha" value={senha} onChange={(e) => { setSenha(e.target.value) }} />
-                <input required disabled={conectando ? true : false} type="password" placeholder=" Repita a Senha" value={confirmaSenha} onChange={(e) => { setConfirmaSenha(e.target.value) }} />
-                <button disabled={conectando ? true : false} type='submit'>Cadastrar</button>
-                <Link to='/login'>
+            <Title>BookStore</Title>
+            <Form onSubmit={(e) => { register(e) }}>
+                <Input required disabled={conectando ? true : false}
+                    type="text" placeholder=" Nome" value={nome}
+                    onChange={(e) => { setNome(e.target.value) }} />
+
+                <Input required disabled={conectando ? true : false}
+                    type="email" placeholder=" E-mail" value={email}
+                    onChange={(e) => { setEmail(e.target.value) }} />
+
+                <Input required disabled={conectando ? true : false}
+                    type="number" placeholder=" CPF" value={cpf}
+                    onChange={(e) => { setCpf(e.target.value) }} />
+
+                <Input required disabled={conectando ? true : false}
+                    type="password" placeholder=" Senha" value={senha}
+                    onChange={(e) => { setSenha(e.target.value) }}
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                    title="Mínimo de 8 caracterese pelo menos 1 letra maiúscula, 1 letra minúscula e 1 número" />
+
+                <Input required disabled={conectando ? true : false}
+                    type="password" placeholder=" Repita a Senha" value={confirmaSenha}
+                    onChange={(e) => { setConfirmaSenha(e.target.value) }}
+                    pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$"
+                    title="Mínimo de 8 caracterese pelo menos 1 letra maiúscula, 1 letra minúscula e 1 número" />
+
+                <Button disabled={conectando ? true : false} type='submit'>
+                    {conectando ? <img src={loading} alt="carregando..." /> : "Cadastrar"}
+                </Button>
+                <Logar to='/login' disabled={conectando ? true : false}>
                     <p>Já possui uma conta? Faça Login!</p>
-                </Link>
-            </form>
+                </Logar>
+            </Form>
         </Container>
     )
 }
-
-const Container = styled.div`
-    height: 100vh;
-    width: 100vw;
-    background-color: #2c698d;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    form{ 
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    button{ 
-        width: 305px;
-        height: 40px;
-        border: 4px solid #272643;    
-        border-radius: 15px;
-        margin-top: 12px;
-        background-color: #e3f6f5;
-    }
-
-    input{
-        width: 305px;
-        height: 40px;
-        border: 4px solid #272643;    
-        border-radius: 15px;
-        margin-top: 12px;
-    }
-    
-    p{
-        margin-top: 7px;
-        color:#ffffff
-    }
-`
