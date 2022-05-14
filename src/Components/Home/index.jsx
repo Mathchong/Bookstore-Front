@@ -1,13 +1,23 @@
-import { Container, Header, Title, UserOptions} from "./style";
+import { Container, Header, MenuOptions, Title, UserOptions} from "./style";
 import { IoMdPerson, IoMdCart, IoMdMenu, IoMdClose } from "react-icons/io";
-import { useContext,  useState } from "react";
+import { useContext,  useState, useEffect } from "react";
 import TokenContext from "../../contexts/TokenContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function HomePage() {
     const navigate = useNavigate();
     const { token, setToken } = useContext(TokenContext);
     const [ menuUser, setMenuUser ] = useState(false);
+    const [ menuOptions, setMenuOptions ] = useState(false);
+    const [ categories, setCategories ] = useState([]);
+
+    useEffect(() => {
+        const URL_CATEGORIES = `${process.env.REACT_APP_URL_API}/categories`;
+        const request = axios.get(URL_CATEGORIES);
+        request.then(response => setCategories(response.data))
+        request.catch(error => console.log(error));
+    },[]);
 
     function logout(){
         setToken("");
@@ -18,7 +28,8 @@ export default function HomePage() {
         <Container>
             <Header>
                 <section>
-                    <IoMdMenu size={20} color={"#00265d"} />
+                    {(menuOptions===false) && <IoMdMenu size={20} color={"#00265d"}  onClick={() => setMenuOptions(true)} />}
+                    {(menuOptions===true) && <IoMdClose size={20} color={"#00265d"}  onClick={() => setMenuOptions(false)} />}
                 </section>
                 <Title>BookStore</Title>
                 <section>
@@ -37,6 +48,12 @@ export default function HomePage() {
                 <UserOptions>
                     <p onClick={logout}>Sair</p>
                 </UserOptions>
+            }
+            {(menuOptions===true) && 
+                <MenuOptions>
+                    <h1>Categorias: </h1>
+                    {categories.map((categories, i) => <p key={i} onClick={() => navigate(`/category/${categories}`)}>+ {categories}</p>)}
+                </MenuOptions>
             }
         </Container>
     )

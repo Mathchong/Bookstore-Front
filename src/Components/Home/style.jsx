@@ -28,12 +28,13 @@ export const Header = styled.header`
     section {
         height: 20px;
         display: flex;
+        justify-content: center;
         gap: 10px;
-        cursor: pointer;        
+        cursor: pointer;  
     }
 `;
 export const Title = styled.h1`
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
     color: #00265d;
 `;
@@ -50,6 +51,33 @@ export const UserOptions = styled.aside`
     box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
     padding: 10px;
 
+    p {
+        font-size: 16px;
+        color: #00265d;
+        cursor: pointer;
+    } 
+    p:hover{
+        opacity: 0.7;
+    }
+`;
+export const MenuOptions = styled.aside`
+    background-color: #ffffff;
+    position: fixed;
+    top: 52px;
+    left: 20px;
+    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    
+    h1 {
+        font-size: 16px;
+        font-weight: 700;
+        color: #00265d;
+    }
     p {
         font-size: 16px;
         color: #00265d;
