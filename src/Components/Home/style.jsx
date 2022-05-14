@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    height: 100vh;
     width: 100vw;
+    height: 100%;
     background-image: linear-gradient(#a5abbd, #456aaa);
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
     justify-content: center;
-    align-items: center;
     gap: 10px;
 `;
 export const Header = styled.header`
@@ -87,39 +87,64 @@ export const MenuOptions = styled.aside`
         opacity: 0.7;
     }
 `;
-// export const Input = styled.input`
-//     width: 305px;
-//     height: 40px;
-//     border: none;   
-//     border-radius: 15px;
-//     padding: 0 10px;
-//     background-color: ${props => props.disabled ? '#dadada' : '#ffffff'};
+export const Categories = styled.article`
+    margin: 65px 20px 30px 20px;
+    display: flex;
+    flex-direction: column;
+    
+    ::-webkit-scrollbar {
+        display: none;
+    }
 
-//     &&::placeholder{
-//         font-family: 'Poppins', sans-serif;
-//         font-weight: 900;
-//         color: ${props => props.disabled ? '#537373' : '#324b4b'}
-//     }
-// `;
-// export const Button = styled.button` 
-//     width: 305px;
-//     height: 40px;
-//     border: none;    
-//     border-radius: 15px;
-//     background-color: #00265d;
-//     font-family: 'Poppins', sans-serif;
-//     font-weight: 900;
-//     color: #ffffff;
-//     cursor: pointer;
-//     ${props => props.disabled && 'opacity: 1.5' };
+    h1 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #ffffff;
+        padding: 20px 0;
+    }
+`;
+export const Category = styled.section`
+    display: flex;
+    overflow-x: scroll;
+    margin-bottom: 15px;
+    gap: 20px;
+`;
+export const Book = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    border: 2px solid #FFFFFF;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 10px;
+    gap: 5px;
 
-//     img{
-//         height: 40px;
-//     }
-// `;
-// export const Title = styled.h1`
-//     font-size: 55px;
-//     font-weight: 700;
-//     color: #ffffff;
-//     margin-bottom: 10px;
-// `;
+    img {
+        width: 150px;
+        object-fit: cover;
+        margin: 10px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+
+    }
+    h2 {
+        width: 150px;
+        font-size: 15px;
+        font-weight: 600;
+        text-align: center;
+        word-wrap: break-word;
+        color: #00265d;
+    }
+
+    h3 {
+        font-size: 12px;
+        color: #00265d;
+    }
+    h4 {
+        font-size: 18px;
+        font-weight: 700;
+        color: #00265d;
+    }
+
+`;
