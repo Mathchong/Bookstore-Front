@@ -30,13 +30,13 @@ export default function CadastroPage() {
             email,
             senha
         }
-        axios.post(`${process.env.REACT_APP_API_URL}/api/register`, user)
+        axios.post(`${process.env.REACT_APP_URL_API}/register`, user)
             .then((response) => {
                 alert('Conta criada com sucesso!')
                 navigate('/login')
             })
             .catch((error) => {
-                console.error(process.env.REACT_APP_API_URL)
+                console.error(process.env.REACT_APP_URL_API)
                 alert("Erro na criação da conta!")
                 setConectando(false)
             })
@@ -56,7 +56,7 @@ export default function CadastroPage() {
                     onChange={(e) => { setEmail(e.target.value) }} />
 
                 <Input required disabled={conectando ? true : false}
-                    type="number" placeholder=" CPF" value={cpf}
+                    type="text" placeholder=" CPF" value={cpf}
                     onChange={(e) => { setCpf(e.target.value) }} />
 
                 <Input required disabled={conectando ? true : false}
