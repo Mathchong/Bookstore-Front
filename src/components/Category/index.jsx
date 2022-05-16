@@ -17,12 +17,10 @@ export default function Category(){
     },[categoryName]);
 
     return (
-        <>
+        <Container>
             <Header />
             <Title>{categoryName.toUpperCase()}</Title>
-            <Container>
-                {booksOfcategory?.map((book, key) => <Book key={key} book={book}/>)}
-            </Container>
-        </>
+            {booksOfcategory?.map((book, key) => <Book key={key} book={book}/>)}
+        </Container>
     );
 }

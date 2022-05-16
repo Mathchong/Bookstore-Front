@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.main`
     width: 100vw;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     background-image: linear-gradient(#a5abbd, #456aaa);
     display: flex;
     flex-wrap: wrap;
     flex-shrink: 0;
     justify-content: center;
-    padding: 150px 50px 50px 50px;
+    padding: 80px 50px 50px 50px;
     gap: 10px;
 `;
 
@@ -20,6 +21,5 @@ export const Title = styled.h1`
     text-align: center;
     display: flex;
     justify-content: center;
-    position: fixed;
-    top: 80px;
+    margin-bottom: 20px;
 `;

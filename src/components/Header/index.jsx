@@ -1,4 +1,4 @@
-import { Container, MenuOptions, Notification, Title, UserOptions } from "./style";
+import { Container, MenuOptions, Notification, OverlayScreen, Title, UserOptions } from "./style";
 import { IoMdPerson, IoMdCart, IoMdMenu, IoMdClose } from "react-icons/io";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -40,6 +40,15 @@ export default function Header() {
         });
         request.catch(error => console.log(error));
     }
+    function closedMenus() {
+        setMenuOptions(false);
+        setMenuUser(false);
+    }
+
+    function toCategotyPage (category) {
+        setMenuOptions(false);
+        navigate(`/category/${category}`);
+    }
 
     return (
         <Container>
@@ -74,10 +83,12 @@ export default function Header() {
             {(menuOptions===true) && 
                 <MenuOptions>
                     <h1>Categorias: </h1>
-                    {categories?.map((categories, i) => <p key={i} 
-                    onClick={() => navigate(`/category/${categories}`)}>+ {categories}</p>)}
+                    {categories?.map((category, i) => <p key={i} 
+                    onClick={() => toCategotyPage(category)}>+ {category}</p>)}
                 </MenuOptions>
             }
+            <OverlayScreen display={menuOptions===false && menuUser===false}
+            onClick={closedMenus}/>
         </Container>
     );
 

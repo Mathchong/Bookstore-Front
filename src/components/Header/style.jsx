@@ -11,7 +11,7 @@ align-items: center;
 position: fixed;
 top: 0;
 left: 0;
-z-index: 1;
+z-index: 2;
 padding: 0 20px;
 gap: 10px;
 
@@ -41,6 +41,7 @@ justify-content: space-between;
 align-items: flex-end;
 box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
 padding: 10px;
+z-index: 2;
 
 p {
     font-size: 16px;
@@ -63,6 +64,7 @@ justify-content: space-between;
 align-items: flex-start;
 box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
 padding: 10px;
+z-index: 2;
 
 h1 {
     font-size: 16px;
@@ -86,4 +88,14 @@ export const Notification = styled.div`
     position: fixed;
     top: 10px;
     right: 50px;
+`;
+export const OverlayScreen = styled.div `
+    width: 100vw;
+    height: 100vh;
+    display: ${props => props.display ? "none" : "flex"};
+    position: fixed;
+    top: 50px;
+    left: 0;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4);
 `;
