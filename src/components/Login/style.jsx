@@ -54,7 +54,7 @@ export const Title = styled.h1`
     margin-bottom: 10px;
     cursor: pointer;
 `;
-export const Registra = styled(Link)`
+export const Register = styled(Link)`
     font-size: 12px;
     font-weight: 700;
     color: #124783;
