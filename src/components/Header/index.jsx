@@ -1,4 +1,4 @@
-import { Container, MenuOptions, Notification, OverlayScreen, Title, UserOptions } from "./style";
+import { Container, MenuOptions, OverlayScreen, Title, UserOptions } from "./style";
 import { IoMdPerson, IoMdCart, IoMdMenu, IoMdClose } from "react-icons/io";
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,17 +10,6 @@ export default function Header() {
     const { token, setToken, categories, setCategories } = useContext(TokenContext);
     const [ menuUser, setMenuUser ] = useState(false);
     const [ menuOptions, setMenuOptions ] = useState(false);
-    const [ shoppingCart, setShoppingCart ] = useState([]);
-
-    useEffect(() => {
-        if (token === "") return;
-
-        const URL_SHOPPINGCART = `${process.env.REACT_APP_URL_API}/user/shoppingCart`;
-        const config = {headers: { Authorization: `Bearer ${token}`}};
-        const request = axios.get(URL_SHOPPINGCART, config);
-        request.then(response => setShoppingCart(response.data.shoppingCart))
-        request.catch(error => console.log(error));
-    },[token, shoppingCart]);
 
 
     useEffect(() => {
@@ -62,7 +51,6 @@ export default function Header() {
                 <section>
                     {(token!=="") && <IoMdCart size={20} color={"#00265d"}  
                     onClick={() => navigate("/user/shopping-cart")}/>} 
-                    {(token!=="" && shoppingCart.length>0) && <Notification/>} 
 
                     {(menuUser===false) && <IoMdPerson size={20} color={"#00265d"} 
                     onClick={() => setMenuUser(true)}/>}
@@ -87,7 +75,7 @@ export default function Header() {
                     onClick={() => toCategotyPage(category)}>+ {category}</p>)}
                 </MenuOptions>
             }
-            <OverlayScreen display={menuOptions===false && menuUser===false}
+            <OverlayScreen displayNone={menuOptions===false && menuUser===false}
             onClick={closedMenus}/>
         </Container>
     );

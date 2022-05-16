@@ -80,19 +80,10 @@ p:hover{
     opacity: 0.7;
 }
 `;
-export const Notification = styled.div`
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: #ff0000;
-    position: fixed;
-    top: 10px;
-    right: 50px;
-`;
 export const OverlayScreen = styled.div `
     width: 100vw;
     height: 100vh;
-    display: ${props => props.display ? "none" : "flex"};
+    display: ${props => props.displayNone ? "none" : "flex"};
     position: fixed;
     top: 50px;
     left: 0;

@@ -7,6 +7,7 @@ import LoginPage from '../Login/'
 import HomePage from '../Home/'
 import ShoppingCart from '../ShoppingCart/index.jsx';
 import Category from '../Category/index.jsx';
+import Checkout from "../Checkout/index.jsx";
 
 export default function App() {
     const [token, setToken] = useState('');
@@ -21,6 +22,7 @@ export default function App() {
                     <Route path="/register" element={<CadastroPage />} />
                     <Route path="/user/shopping-cart" element={<ShoppingCart />} />
                     <Route path="/category/:categoryName" element={<Category />} />
+                    <Route path="/checkout" element={<Checkout/>} />
                 </Routes>
             </BrowserRouter>
         </TokenContext.Provider>
