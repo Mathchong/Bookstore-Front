@@ -4,9 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import loading from './../../assets/loading.gif';
 import { Button, Container, Form, Input, Logar, Title } from './style';
 
-
-
-
 export default function CadastroPage() {
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
