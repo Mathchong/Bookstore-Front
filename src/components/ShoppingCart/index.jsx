@@ -5,6 +5,7 @@ import { BookData, Container, Footer, Title } from "./style.jsx";
 import Header from "./../Header/index.jsx";
 import axios from "axios";
 import { IoMdTrash } from "react-icons/io";
+import swal from "sweetalert";
 
 
 export default function ShoppingCart(){
@@ -20,8 +21,7 @@ export default function ShoppingCart(){
         const URL_SHOPPINGCART = `${process.env.REACT_APP_URL_API}/user/shoppingCart`;
         const config = {headers: { Authorization: `Bearer ${token}`}};
         const request = axios.get(URL_SHOPPINGCART, config);
-        request.then(response => {setShoppingCart(response.data);
-            console.log(response.data.total)});
+        request.then(response => setShoppingCart(response.data));
         request.catch(error => console.log(error));
     },[token]);
 
@@ -31,17 +31,23 @@ export default function ShoppingCart(){
         const URL_SHOPPINGCART = `${process.env.REACT_APP_URL_API}/user/shoppingCart`;
         const config = {headers: { Authorization: `Bearer ${token}`}};
         const request = axios.get(URL_SHOPPINGCART, config);
-        request.then(response => {setShoppingCart(response.data);
-                                    console.log(response.data)});
+        request.then(response => setShoppingCart(response.data));
         request.catch(error => console.log(error));
     }
 
     function deleteBook(id) {
-        const URL_DELETE = `${process.env.REACT_APP_URL_API}/user/deleteBook/${id}`;
-        const config = {headers: { Authorization: `Bearer ${token}`}};
-        const request = axios.delete(URL_DELETE, config);
-        request.then(() => attShoppingCart());
-        request.catch(error => console.log(error));
+        const modal = swal("Tem certeza que quer deletar esse item do seu carinho?", {
+            buttons: {false: "Não", true: "Claro"} 
+        });
+        modal.then(value => {
+            if(value==="true") {
+                const URL_DELETE = `${process.env.REACT_APP_URL_API}/user/deleteBook/${id}`;
+                const config = {headers: { Authorization: `Bearer ${token}`}};
+                const request = axios.delete(URL_DELETE, config);
+                request.then(() => attShoppingCart());
+                request.catch(error => console.log(error));
+            }
+        })
     }
 
     return (
@@ -49,8 +55,9 @@ export default function ShoppingCart(){
             <Header />
             <Container>
                 <Title>CONFIRA O SEU CARRINHO</Title>
-
-                {shoppingCart.shoppingCart?.map( (book, key) =>
+                {(shoppingCart.shoppingCart?.length === 0) && 
+                <h5>Você não tem nenhum livro no seu carrinho.</h5>}
+                {(shoppingCart.shoppingCart?.length !== 0) && shoppingCart.shoppingCart?.map( (book, key) =>
                     <BookData key={key}>
                         <img src={book.urlImagem} alt={book.titulo}/>
                         <section>
@@ -62,7 +69,7 @@ export default function ShoppingCart(){
                     </BookData>
                 )}
                 <Footer>
-                    <h1>Total: ${parseFloat(shoppingCart?.total).toFixed(2).replace(".", ",")}</h1>
+                    <h1>Total: {(shoppingCart?.total)}</h1>
                     <button onClick={() => navigate("/checkout")}> Finalizar a compra</button>
                 </Footer>
             </Container>

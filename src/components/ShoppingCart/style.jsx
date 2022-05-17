@@ -11,6 +11,10 @@ export const Container = styled.main`
     align-items: center;
     padding: 80px 30px 50px 30px;
     gap: 10px;
+    h5 {
+        font-size: 16px;
+        color: #00265d;
+    }
 `;
 
 export const Title = styled.h1`
